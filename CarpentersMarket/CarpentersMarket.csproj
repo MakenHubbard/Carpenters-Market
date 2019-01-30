@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.50.5" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.1" />
   </ItemGroup>
@@ -21,7 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DataAccess\" />
+    <Folder Include="ClientApp\src\Firebase\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Models\Users.cs" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
