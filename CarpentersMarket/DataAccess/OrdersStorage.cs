@@ -9,30 +9,27 @@ using CarpentersMarket.Models;
 
 namespace CarpentersMarket.DataAccess
 {
-    public class UsersStorage
+    public class OrdersStorage
     {
         private readonly string ConnectionString;
 
-        public UsersStorage(IConfiguration config)
+        public OrdersStorage(IConfiguration config)
         {
             ConnectionString = config.GetSection("ConnectionString").Value;
         }
 
         // Api sql goes here, use ConnectionString for new SqlConnection
 
-        public List<Users> GetAll()
+        public List<Orders> GetAll()
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
 
-                var result = connection.Query<Users>(@"select * from Users");
+                var result = connection.Query<Orders>(@"select * from Orders");
 
                 return result.ToList();
             }
-
         }
-
-
     }
 }

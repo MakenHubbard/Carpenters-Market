@@ -1,38 +1,35 @@
-﻿using System;
+﻿using CarpentersMarket.Models;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 using Dapper;
-using System.Data.SqlClient;
-using CarpentersMarket.Models;
 
 namespace CarpentersMarket.DataAccess
 {
-    public class UsersStorage
+    public class CustomersReviewsStorage
     {
         private readonly string ConnectionString;
 
-        public UsersStorage(IConfiguration config)
+        public CustomersReviewsStorage(IConfiguration config)
         {
             ConnectionString = config.GetSection("ConnectionString").Value;
         }
 
-        // Api sql goes here, use ConnectionString for new SqlConnection
+        // Api calls below
 
-        public List<Users> GetAll()
+        public List<CustomerReviews> GetAll()
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
 
-                var result = connection.Query<Users>(@"select * from Users");
+                var result = connection.Query<CustomerReviews>(@"select * from CustomerReviews");
 
                 return result.ToList();
             }
-
         }
-
-
     }
 }
