@@ -26,7 +26,7 @@ namespace CarpentersMarket.DataAccess
             {
                 connection.Open();
 
-                var result = connection.Query<Products>(@"select * from Products");
+                var result = connection.Query<Products>(@"select * from Product");
                 return result.ToList();
             }
             
