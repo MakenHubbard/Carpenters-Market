@@ -6,12 +6,13 @@ import auth from '../../Firebase/auth';
 class Register extends React.Component {
     state = {
         user: {
-            email: '';
-            password: '';
+            email: '',
+            password: '',
+            isCarpenter: false,
         },
         error: {
             message: '',
-            calssText: 'alert alert-danger hidden';
+            calssText: 'alert alert-danger hidden',
         },
     }
 
@@ -23,7 +24,14 @@ class Register extends React.Component {
         auth
             .registerUser(user)
             .then(() => {
-                this.props.history.push('/');
+                if (this.state.user.isCarpenter == false)
+                {
+                    this.props.history.push('/');
+                }
+                 else if (this.state.user.isCarpenter == true)  
+                {
+                        this.props.history.push('/CarpentersHome');
+                }
             })
             .catch((error) => {
                 const tempError = {
@@ -34,6 +42,7 @@ class Register extends React.Component {
             });
     };
 
+// getting email and password for register
 
     setEmail = (e) => {
         const tempUser = { ...this.state.user };
@@ -47,35 +56,90 @@ class Register extends React.Component {
         this.setState({ user: tempUser });
     }
 
+// Checking bool for carpenter
 
+//setCarpenter = (e) => {
+   // if (this.checked){
+      //  this.setState({ user.isCarpenter : true});
+    //} 
+    //else {
+
+    //}
+//}
 
     render() {
         const { user } = this.state;
-
         return (
-            <div>
-                <form>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email"></input>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"></input>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputFile">File input</label>
-                        <input type="file" id="exampleInputFile"></input>
-                        <p class="help-block">Example block-level help text here.</p>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> Are you a carpenter</input>
-                        </label>
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
+            <div className="Register">
+                <div id="login-form">
+
+                    <h1 className="text-center">Register</h1>
+
+                    {/* Error Message Alert */}
+                    <div className={this.state.error.classText} role="alert">{this.state.error.message}</div>
+
+                    {/* Form */}
+                    <form className="form-horizontal col-sm-6 col-sm-offset-3">
+
+                        {/* Email Input Group */}
+                        <div className="form-group">
+                            <label htmlFor="inputEmail" className="col-sm-4 control-label">
+                                Email:
+                            </label>
+                            <div className="col-sm-8">
+                                <input
+                                    type="email"
+                                    className="form-control"
+                                    id="inputEmail"
+                                    placeholder="Email"
+                                    value={user.email}
+                                    onChange={this.emailChange}
+                                />
+                            </div>
+                        </div>
+
+                        {/* Password Input Group */}
+                        <div className="form-group">
+                            <label htmlFor="inputPassword" className="col-sm-4 control-label">
+                                Password:
+                            </label>
+                            <div className="col-sm-8">
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    id="inputPassword"
+                                    placeholder="Password"
+                                    value={user.password}
+                                    onChange={this.passwordChange}
+                                />
+                            </div>
+                        </div>
+
+                        {/* Login Button */}
+                        <div className="form-group">
+                            <div className="col-sm-12 text-center">
+                                <Link to="/login">Need to Login?</Link>
+                            </div>
+                        </div>
+
+                        {/* Submit Button */}
+                        <div className="form-group">
+                            <div className="col-sm-12">
+                                <button
+                                    type="submit"
+                                    className="btn btn-default col-xs-12"
+                                    onClick={this.registerClickEvent}
+                                >
+                                    Register
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
             </div>
         );
     }
 }
+export default Register;
