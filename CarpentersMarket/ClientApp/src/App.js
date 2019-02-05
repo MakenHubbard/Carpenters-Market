@@ -6,6 +6,7 @@ import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import CustomerView from './components/CustomerView/CustomerView';
+import ProductsPage from './components/ProductsPage/ProductsPage';
 
 import FirebaseConnection from './Firebase/connection';
 
@@ -41,6 +42,10 @@ export default class App extends Component {
                                 <Route 
                                     path='/customerview'
                                     component={CustomerView}
+                                />
+                                <Route
+                                    path='/productspage'
+                                    component={ProductsPage}
                                 />
 
                             </Switch>
