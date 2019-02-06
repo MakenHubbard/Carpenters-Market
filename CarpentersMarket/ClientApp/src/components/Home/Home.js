@@ -9,7 +9,7 @@ class Home extends React.Component {
             <div className='Home'>
                 
                 <div>
-                    <Link to='/producttypes' className='btn btn-lg btn-block'>Are you a customer?</Link>
+                    <Link to='/customerview' className='btn btn-lg btn-block'>Are you a customer?</Link>
                 </div>
                 <div>
                     <button type="button" className="btn btn-primary">Are you a Carpenter?</button>

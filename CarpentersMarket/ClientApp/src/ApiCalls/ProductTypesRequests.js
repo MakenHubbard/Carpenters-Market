@@ -3,7 +3,7 @@
 const getAllProductTypes = () => {
     return new Promise((resolve, reject) => {
         axios
-            .get('api/producttypes')
+            .get('api/producttype')
             .then(res => {
                 resolve(res.data);
             })
