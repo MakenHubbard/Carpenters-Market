@@ -5,6 +5,8 @@ import usersRequests from '../../ApiCalls/UserRequests';
 import prodType from '../../ApiCalls/ProductTypesRequests';
 import productsRequests from '../../ApiCalls/ProductsRequests';
 
+import './CustomerView.css';
+
 
 class CustomerView extends React.Component {
     state = {
@@ -67,6 +69,8 @@ class CustomerView extends React.Component {
                         <p><b>Description:</b> {prod.description}</p>
                         <p>Quantity: {prod.quantity}</p>
 
+                        <button type="button" className="btn btn-info"> Order this product </button>
+
                     </div>
                 </div >
             )
@@ -91,6 +95,8 @@ class CustomerView extends React.Component {
 
                         <p><b>Description:</b> {prod.description}</p>
                         <p>Quantity: {prod.quantity}</p>
+
+                        <button type="button" className="btn btn-info"> Order this product </button>
 
                     </div>
                 </div >
@@ -126,6 +132,7 @@ class CustomerView extends React.Component {
                 <div className="col-xs-7">
 
                     {
+                        // taking the selectedTypeId current state and checking to see if its not empty then running the renderproducts func that maps over what is passed in it and filter the ones out where the productTypeId is equal to the id of the selected product type otherwise just display all the products
                         this.state.selectedTypeId != '' ? this.renderProducts(this.state.products.filter(product => product.productTypeId == this.state.selectedTypeId)) : this.renderProducts(this.state.products)
 
                     }
