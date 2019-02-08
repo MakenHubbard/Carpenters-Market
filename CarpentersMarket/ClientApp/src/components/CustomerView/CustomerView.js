@@ -3,24 +3,29 @@ import { Link } from 'react-router-dom';
 
 import usersRequests from '../../ApiCalls/UserRequests';
 import prodType from '../../ApiCalls/ProductTypesRequests';
+import productsRequests from '../../ApiCalls/ProductsRequests';
 
 
 class CustomerView extends React.Component {
     state = {
-        users: [],
+        products: [],
         productTypes: [],
+        selectedTypeId: '',
+
     }
 
     componentDidMount = (e) => {
-        this.getAllUsers();
+        this.getProducts();
         this.getTheProductTypes();
     }
 
-    getAllUsers = () => {
-        usersRequests
-            .getAllUsers()
-            .then((users) => {
-                this.setState({ users: users });
+    //-------------------------- Api calls 
+
+    getProducts = () => {
+        productsRequests
+            .getAllProducts()
+            .then((products) => {
+                this.setState({ products });
             })
             .catch((err) => {
                 console.error('in the customerview component', err);
@@ -34,35 +39,73 @@ class CustomerView extends React.Component {
                 this.setState({ productTypes: types })
             })
             .catch((err) => {
-                console.error('error in the product types component', err)
+                console.error('error in the product types component inside customerview', err)
             })
     }
 
+    //------------------- click events
+
+    clickedType = (e) => {
+        this.setState({ selectedTypeId: e.target.id }, () => { console.log(this.state.selectedTypeId) })
+        this.setState({ isClicked: true })
+    }
+
+    //----------------render products
+    renderProducts = (products) => {
+        return products.map(prod => {
+
+            return (
+                <div key={prod.id} className="panel panel-default" >
+                    <div className="panel-heading">
+                        <h2 className="panel-title"><b>{prod.title}</b></h2>
+                    </div>
+                    <div className="panel-body">
+                        <div>
+                            <img src={prod.imageUrl} />
+                        </div>
+
+                        <p><b>Description:</b> {prod.description}</p>
+                        <p>Quantity: {prod.quantity}</p>
+
+                    </div>
+                </div >
+            )
+
+        })
+    }
+
+
     render() {
 
-        const carpenters = this.state.users.map(user => {
-            if (user.isCarpenter == true) {
-                return (
-                    <div key={user.id} className="panel panel-default" >
-                        <div className="panel-heading">
-                            <h3 className="panel-title">Carpenter Id: {user.id}</h3>
-                        </div>
-                        <div className="panel-body">
-                            <p>Carpenter: {`${user.firstName}` + " " + `${user.lastName}`}</p>
+        const products = this.state.products.map(prod => {
 
+            return (
+                <div key={prod.id} className="panel panel-default" >
+                    <div className="panel-heading">
+                        <h2 className="panel-title"><b>{prod.title}</b></h2>
+                    </div>
+                    <div className="panel-body">
+                        <div>
+                            <img src={prod.imageUrl} />
                         </div>
-                    </div >
-                )
-            }
+
+                        <p><b>Description:</b> {prod.description}</p>
+                        <p>Quantity: {prod.quantity}</p>
+
+                    </div>
+                </div >
+            )
+
         })
 
         const pt = this.state.productTypes.map(pType => {
+
             return (
-                <div key={pType.id}>
-                    <div class="btn-group-vertical" role="group" aria-label="...">
-                        <button type="button" className="btn btn-primary">{pType.title}</button>
-                        
-</div>
+                <div key={pType.id}  >
+                    <div className="btn-group-vertical" role="group" aria-label="...">
+                        <button type="button" className="btn btn-primary" id={pType.id} onClick={this.clickedType}>{pType.title}</button>
+
+                    </div>
 
 
                 </div>
@@ -70,7 +113,8 @@ class CustomerView extends React.Component {
         })
 
 
-
+        console.log(this.state.products);
+        console.log(products);
         return (
             <div className="customersData row">
                 <div>
@@ -80,7 +124,12 @@ class CustomerView extends React.Component {
                     {pt}
                 </div>
                 <div className="col-xs-7">
-                    {carpenters}
+
+                    {
+                        this.state.selectedTypeId != '' ? this.renderProducts(this.state.products.filter(product => product.productTypeId == this.state.selectedTypeId)) : this.renderProducts(this.state.products)
+
+                    }
+
                 </div>
             </div>
         )

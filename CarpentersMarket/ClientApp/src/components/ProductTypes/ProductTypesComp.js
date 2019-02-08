@@ -16,7 +16,7 @@ class ProductTypes extends React.Component {
         prodType
             .getAllProductTypes()
             .then((types) => {
-                this.setState({ productTypes: types })
+                this.setstate({ productTypes: types })
             })
             .catch((err) => {
                 console.error('error in the product types component', err)
@@ -38,7 +38,7 @@ class ProductTypes extends React.Component {
         return (
             <div className="productTypes">
                 <div>
-                    <p><Link to='/' className='btn btn-lg btn-success'>Back to Home</Link></p>
+                    <p><link to='/' className='btn btn-lg btn-success'>back to home</link></p>
                 </div>
                 <div>
                     {pt}
