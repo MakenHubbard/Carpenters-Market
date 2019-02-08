@@ -25,5 +25,11 @@ namespace CarpentersMarket.Controllers
             return Ok(_storage.GetAll());
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetSelectedProductType(int id)
+        {
+            return Ok(_storage.GetSelectedProducts(id));
+        }
+
     }
 }

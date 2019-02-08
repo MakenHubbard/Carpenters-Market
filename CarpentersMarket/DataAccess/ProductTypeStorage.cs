@@ -32,13 +32,13 @@ namespace CarpentersMarket.DataAccess
             }
         }
 
-        public List<CarpentersBasedOnProduct> GetSelectedProducts()
+        public List<ProductTypes> GetSelectedProducts(int id)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
 
-                var result = connection.Query<CarpentersBasedOnProduct>(@"select Title, Description, UsersId, ProductTypeId, Quantity, ImageUrl, FirstName, LastName from Product join Users on users.Id = product.UsersId where product.ProductTypeId = 3");
+                var result = connection.Query<ProductTypes>(@"select Title, Description, UsersId, ProductTypeId, Quantity, ImageUrl, FirstName, LastName from Product join Users on users.Id = product.UsersId where product.ProductTypeId = @id", new { id });
 
                 return result.ToList();
             }
