@@ -31,5 +31,17 @@ namespace CarpentersMarket.DataAccess
                 return result.ToList();
             }
         }
+
+        //public void AddOrder( Orders order)
+        //{
+        //    using (var connection = new SqlConnection(ConnectionString))
+        //    {
+        //        connection.Open();
+
+        //        var result = connection.Query<Orders>(@"",order);
+
+        //        return result.ToList();
+        //    }
+        //}
     }
 }

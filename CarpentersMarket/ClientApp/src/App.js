@@ -8,6 +8,7 @@ import Register from './components/Register/Register';
 import CustomerView from './components/CustomerView/CustomerView';
 import ProductsPage from './components/ProductsPage/ProductsPage';
 import ProductTypesComp from './components/ProductTypes/ProductTypesComp';
+import CarpenterView from './components/CarpenterView/CarpenterView';
 
 import FirebaseConnection from './Firebase/connection';
 
@@ -40,7 +41,11 @@ export default class App extends Component {
                                     component={Login}
 
                                 />
-                                <Route 
+                                <Route
+                                    path='/carpenterview'
+                                    component={CarpenterView}
+                                />
+                                <Route
                                     path='/customerview'
                                     component={CustomerView}
                                 />
