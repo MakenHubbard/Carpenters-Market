@@ -13,6 +13,19 @@ const getAllProducts = () => {
     });
 };
 
+const addProduct = (newProduct) => {
+    return new Promise((resolve, reject) => {
+        axios   
+            .post(`api/products`, newProduct)
+            .then((res) => {
+                resolve(res.data);
+            })
+            .catch((err) => {
+                reject(console.error('error in the add products requests in products request', err))
+            })
+    })
+}
 
 
-export default { getAllProducts };
+
+export default { getAllProducts, addProduct };

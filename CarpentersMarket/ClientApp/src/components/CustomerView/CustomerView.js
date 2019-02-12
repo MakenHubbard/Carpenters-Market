@@ -1,7 +1,6 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
 
-import usersRequests from '../../ApiCalls/UserRequests';
 import prodType from '../../ApiCalls/ProductTypesRequests';
 import productsRequests from '../../ApiCalls/ProductsRequests';
 
@@ -50,6 +49,10 @@ class CustomerView extends React.Component {
     clickedType = (e) => {
         this.setState({ selectedTypeId: e.target.id }, () => { console.log(this.state.selectedTypeId) })
         this.setState({ isClicked: true })
+    }
+
+    orderProductEvent = (e) => {
+
     }
 
     //----------------render products
@@ -118,9 +121,6 @@ class CustomerView extends React.Component {
             )
         })
 
-
-        console.log(this.state.products);
-        console.log(products);
         return (
             <div className="customersData row">
                 <div>

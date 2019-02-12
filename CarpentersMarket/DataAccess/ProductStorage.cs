@@ -29,11 +29,23 @@ namespace CarpentersMarket.DataAccess
                 var result = connection.Query<Products>(@"select * from Product");
                 return result.ToList();
             }
-            
+        }
 
+        public void addNewProduct(Products product)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
 
-          
-
+                connection.Execute(@"insert into 
+                                    Product(Title,Description,USersId,ProductTypeId,Quantity,ImageUrl)
+                                    values                              (@Title,
+                                                                                    @Description,
+                                                                                    @UsersId,
+                                            @ProductTypeId,
+                                            @Quantity,
+                                            @ImageUrl)", product);
+            }
         }
 
     }

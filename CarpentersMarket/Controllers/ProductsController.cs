@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CarpentersMarket.DataAccess;
+using CarpentersMarket.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
@@ -23,6 +24,12 @@ namespace CarpentersMarket.Controllers
         public IActionResult GetAllUsers()
         {
             return Ok(_storage.GetAll());
+        }
+
+        [HttpPost]
+        public void AddProduct([FromBody] Products product)
+        {
+            _storage.addNewProduct(product);
         }
     }
 }
